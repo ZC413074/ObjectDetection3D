@@ -1,4 +1,4 @@
-from DataUtils.modelnet_datasets import *
+from Dataset.modelnet_datasets import *
 import torch
 
 

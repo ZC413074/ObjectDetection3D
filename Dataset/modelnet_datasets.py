@@ -4,7 +4,7 @@ import pickle
 
 from tqdm import tqdm
 from torch.utils.data import Dataset
-
+from Common.augment_cloud import *
 
 def pc_normalize(pc):
     centroid = np.mean(pc, axis=0)
@@ -112,6 +112,12 @@ class ModelNetDataset(Dataset):
             cls = self.classes[self.datapath[index][0]]
             label = np.array([cls]).astype(np.int32)
             point_set = np.loadtxt(fn[1], delimiter=',').astype(np.float32)
+            points = points.transpose(2, 1)
+
+            if args.augment:
+                random_point_dropout(point_set)
+                point_set[:, :, 0:3] = random_scale_point_cloud(points[:, :, 0:3])
+                point_set[:, :, 0:3] = shift_point_cloud(points[:, :, 0:3])
 
             if self.uniform:
                 point_set = farthest_point_sample(point_set, self.num_point)

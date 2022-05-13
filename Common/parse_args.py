@@ -18,7 +18,7 @@ def point_net_train():
     '''PARAMETERS'''
     parser = argparse.ArgumentParser('training')
     parser.add_argument('--data_path', type=str, default='F:/dataset/modelnet40_normal_resampled', help='dataset root path')
-    parser.add_argument('--use_cpu', action='store_true', default=False, help='use cpu mode')
+    parser.add_argument('--deicve', type=str, default='gpu', help='gpu or cpu')
     parser.add_argument('--gpu', type=str, default='0', help='specify gpu device')
     parser.add_argument('--batch_size', type=int, default=24, help='batch size in training')
     parser.add_argument('--model', default='ModelUtils.model_pointnet_classify', help='model name [default: pointnet_cls]')
@@ -31,6 +31,7 @@ def point_net_train():
     parser.add_argument('--decay_rate', type=float, default=1e-4, help='decay rate')
     parser.add_argument('--use_normals', action='store_true', default=False, help='use normals')
     parser.add_argument('--process_data', action='store_true', default=False, help='save data offline')
+    parser.add_argument('--augment', action='store_true', default=True, help='data augment')
     parser.add_argument('--use_uniform_sample', action='store_true', default=False, help='use uniform sampiling')
     parser.add_argument('--num_workers', type=int, default=8, help='maximum number of dataloader workers')
 
